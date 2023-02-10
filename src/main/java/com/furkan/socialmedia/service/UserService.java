@@ -32,4 +32,12 @@ public class UserService {
     public Optional<User> findById(long id){
         return userRepository.findById(id);
     }
+
+
+    public Optional<User> findByUsernameAndPassword(String username,String password){
+        return userRepository.findOptionalByUsernameAndPassword(username,password);
+    }
+
+
+
 }

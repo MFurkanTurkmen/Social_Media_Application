@@ -1,5 +1,6 @@
 package com.furkan.socialmedia.repository.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;

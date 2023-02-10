@@ -1,6 +1,8 @@
 package com.furkan.socialmedia.Controller.Web;
 
+import com.furkan.socialmedia.Utility.StaticValues;
 import com.furkan.socialmedia.model.ModelLogin;
+import com.furkan.socialmedia.model.ModelRegister;
 import com.furkan.socialmedia.repository.entity.User;
 import com.furkan.socialmedia.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -8,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -58,39 +62,81 @@ public class LoginController {
                 // <h1 th:text="${model.title}"></h1> burada ki model kısmıdır
                 // title ise bu nesneye verdiğimiz aşağıdaki adlardır
                 ModelLogin.builder()
-                .title("Kullanıcı girisi")
-                .username("Kullanıcı Adı")
-                .password("Sifre")
-                .loginbutton("Giriş Yap")
-                .tabRegister("Uye Ol")
-                .rememberMe("Beni Hatırla")
+                        .title("Login Page")
+                        .username("Username")
+                        .password("Password")
+                        .loginbutton("Login")
+                        .tabRegister("Sıgn Up")
+                        .rememberMe("Remember me")
+                        .error(false)
                         .build());
 
         return view;
+    }
+
+    @PostMapping("")
+    public Object login(String username, String password) {
+        Optional<User> user = userService.findByUsernameAndPassword(username, password);
+        if (user.isPresent()) {
+            StaticValues.user = user.get();
+            return "redirect:/home";
+        } else {
+            ModelAndView model = new ModelAndView();
+            model.addObject("model", //burada da attributeName ne ise
+                    // <h1 th:text="${model.title}"></h1> burada ki model kısmıdır
+                    // title ise bu nesneye verdiğimiz aşağıdaki adlardır
+                    ModelLogin.builder()
+                            .title("Login Page")
+                            .username("Username")
+                            .password("Password")
+                            .loginbutton("Login")
+                            .tabRegister("Sıgn Up")
+                            .rememberMe("Remember me")
+                            .error(true)
+                            .build());
+            model.setViewName("login");
+            return model;
+        }
     }
 
     @GetMapping("/register")
     public ModelAndView register() {
         ModelAndView view = new ModelAndView();
         view.setViewName("register");
+        view.addObject("modelRegister", ModelRegister.builder()
+                .title("Sign Up")
+                .name("Name")
+                .username("USERNAME")
+                .surname("surname")
+                .birtdate("BirthDate")
+                .email("E-Mail")
+                .gender("Gender")
+                .password("Password")
+                .loginButton("Login Page")
+                .submitButton("Sign up")
+                .phone("Phone")
+                .build()
+        );
         return view;
     }
 
     @PostMapping("/register")
-    public Object register(String username,String name,String surname,String password, String birthday,
-                           String gender ,String email,String phone) {
+    public Object register(String username, String name, String surname, String password, String birthday,
+                           String gender, String email, String phone) {
         userService.save(User.builder()
-                        .username(username)
-                        .name(name)
-                        .surname(surname)
-                        .password(password)
-                        .birthdate(birthday)
-                        .gender(gender)
-                        .email(email)
-                        .phone(phone)
-                        .createDate(new Date())
+                .username(username)
+                .name(name)
+                .surname(surname)
+                .password(password)
+                .birthdate(birthday)
+                .gender(gender)
+                .email(email)
+                .phone(phone)
+                .createDate(new Date())
                 .build());
 
         return "redirect:/";
     }
+
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 
 <head>
     <!-- Required meta tags-->
@@ -24,6 +24,7 @@
 
     <!-- Main CSS-->
     <link href="register/css/main.css" rel="stylesheet" media="all">
+
 </head>
 
 <body>
@@ -32,37 +33,42 @@
         <div class="card card-3">
             <div class="card-heading"></div>
             <div class="card-body">
-                <h2 class="title">Register</h2>
-                <form method="post" action="/register">
+                <h2 class="title" th:text="${modelRegister.title}"></h2>
+                <form method="post" action="/register" name="register_form" onsubmit="return validateForm()" required>
 
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Username" name="username">
+                        <input class="input--style-3" type="text"
+                               th:placeholder="${modelRegister.username}" name="username" >
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Name" name="name">
-                    </div>
-
-
-                    <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Surname" name="surname">
+                        <input class="input--style-3" type="text"
+                               th:placeholder="${modelRegister.name}" name="name">
                     </div>
 
 
                     <div class="input-group">
-                        <input class="input--style-3" type="password" placeholder="Password" name="password">
+                        <input class="input--style-3" type="text"
+                               th:placeholder="${modelRegister.surname}" name="surname">
                     </div>
 
 
                     <div class="input-group">
-                        <input class="input--style-3 js-datepicker" type="text" placeholder="Birthdate" name="birthday">
+                        <input class="input--style-3" type="password"
+                               th:placeholder="${modelRegister.password}" name="password">
+                    </div>
+
+
+                    <div class="input-group">
+                        <input class="input--style-3 js-datepicker"
+                               type="text" th:placeholder="${modelRegister.birtdate}" name="birthday">
                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                     </div>
 
                     <div class="input-group">
                         <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="gender">
-                                <option disabled="disabled" selected="selected">Gender</option>
+                            <select name="gender" >
+                                <option disabled="disabled" selected="selected" th:text="${modelRegister.gender}" ></option>
                                 <option>Male</option>
                                 <option>Female</option>
                             </select>
@@ -70,18 +76,22 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3" type="email" placeholder="Email" name="email">
+                        <input class="input--style-3" type="email"
+                               th:placeholder="${modelRegister.email}" name="email">
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Phone" name="phone">
+                        <input class="input--style-3" type="text"
+                               th:placeholder="${modelRegister.phone}" name="phone">
                     </div>
                     <div class="p-t-10">
-                        <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                        <button class="btn btn--pill btn--green"
+                                th:text="${modelRegister.submitButton}" type="submit"></button>
                     </div>
 
                     <div>
-                        <button class="btn btn--pill btn--green bubbly-button" type="button" >
-                            <a class="register-button" href="http://localhost:9090">Login </a>
+                        <button class="btn btn--pill btn--green bubbly-button" style="margin-bottom: -39px;" type="button" >
+                            <a class="register-button"
+                               th:text="${modelRegister.loginButton}" href="http://localhost:9090"> </a>
                         </button>
                     </div>
 
@@ -100,6 +110,7 @@
 <script src="register/vendor/select2/select2.min.js"></script>
 <script src="register/vendor/datepicker/moment.min.js"></script>
 <script src="register/vendor/datepicker/daterangepicker.js"></script>
+
 
 <!-- Main JS-->
 <script src="register/js/global.js"></script>

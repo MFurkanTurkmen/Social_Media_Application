@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PostService {
-    PostRepository postRepository;
+    private final PostRepository postRepository;
     public void save(Post post){
         postRepository.save(post);
     }
@@ -23,6 +23,10 @@ public class PostService {
     }
     public List<Post> listAll(){
         return postRepository.findAll();
+    }
+
+    public Optional<List<Post>> findByUserid(long userid){
+        return postRepository.findByUserid(userid);
     }
 
     public Optional<Post> findById(long id){

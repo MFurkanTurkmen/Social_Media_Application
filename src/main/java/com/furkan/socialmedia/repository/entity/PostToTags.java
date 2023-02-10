@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Table
+@Table(name = "tbluser")
 @Entity
 @Data
 @Builder

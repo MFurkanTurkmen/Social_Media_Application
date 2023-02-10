@@ -30,10 +30,10 @@
 </head>
 <body>
 <div class="limiter">
-	<div class="container-login100" style="background-image: url('https://png.pngtree.com/background/20211215/original/pngtree-emoji-blue-gradient-social-media-background-picture-image_1461687.jpg');">
+	<div class="container-login100">
 		<div class="wrap-login100">
 			<form class="login100-form validate-form"
-				  action="post" name="Login_form" id="Login_form" method="post">
+				  action="/" name="Login_form" id="Login_form" method="post">
 
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-account"></i>
@@ -52,11 +52,17 @@
 					<span class="focus-input100" data-placeholder="&#xf191;"></span>
 				</div>
 
+				<label class="text-danger p-b-5 p-t-0 " th:text="${model.error ? 'Kullanıcı adı ya da şifre hatalıdır.' : ''}">
+					</label>
+
+
 				<div class="contact100-form-checkbox">
 					<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 					<label class="label-checkbox100" for="ckb1" th:text="${model.rememberMe}">
 					</label>
 				</div>
+
+
 
 				<div class="container-login100-form-btn">
 					<button class="login100-form-btn" type="submit" th:text="${model.loginbutton}">

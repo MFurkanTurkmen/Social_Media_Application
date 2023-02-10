@@ -24,4 +24,5 @@ public class ModelLogin {
 
     String tabRegister;
     String rememberMe;
+    boolean error;
 }
