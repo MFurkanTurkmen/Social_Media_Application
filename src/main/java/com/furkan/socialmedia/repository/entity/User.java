@@ -1,18 +1,17 @@
 package com.furkan.socialmedia.repository.entity;
 
-import com.sun.istack.NotNull;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Table(name = "tbluser")
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
@@ -25,7 +24,7 @@ public class User {
     private String phone;
     private String gender;
     private String avatar;
-    private Date createDate;
+
 
 
 }

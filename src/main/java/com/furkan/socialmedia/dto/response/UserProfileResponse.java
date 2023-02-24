@@ -1,4 +1,4 @@
-package com.furkan.socialmedia.model;
+package com.furkan.socialmedia.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,18 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ModelRegister {
-    private String title;
+public class UserProfileResponse {
     private String username;
     private String name;
     private String surname;
-    private String password;
-    private String birtdate;
-    private String gender;
+    private String birthdate;
     private String email;
     private String phone;
-    private String submitButton;
-    private String loginButton;
-    private long createdate;
-    private long updatedate;
+    private String gender;
+    private String avatar;
 }

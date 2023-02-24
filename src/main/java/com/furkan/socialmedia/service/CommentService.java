@@ -33,4 +33,8 @@ public class CommentService {
         return commentRepository.findById(id);
     }
 
+    public List<Comment> findByPostId(Long id){
+        return commentRepository.findByPostid(id);
+    }
+
 }

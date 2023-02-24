@@ -1,6 +1,8 @@
 package com.furkan.socialmedia.model;
 
+import com.furkan.socialmedia.repository.entity.Comment;
 import com.furkan.socialmedia.repository.entity.Post;
+import com.furkan.socialmedia.repository.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +21,9 @@ public class ModelHome {
     private String userId;
     private long followerCount;
     private String email;
-    private Optional<List<Post>> postlist;
+    private List<Post> postlist;
+    private List<Comment> commentList;
     private long followCount;
+    private List<User> userList;
 
 }

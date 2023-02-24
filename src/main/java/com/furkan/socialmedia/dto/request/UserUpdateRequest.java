@@ -1,4 +1,4 @@
-package com.furkan.socialmedia.model;
+package com.furkan.socialmedia.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,18 +9,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ModelRegister {
-    private String title;
-    private String username;
+public class UserUpdateRequest {
+
     private String name;
     private String surname;
     private String password;
-    private String birtdate;
+    private String birthday;
     private String gender;
-    private String email;
     private String phone;
-    private String submitButton;
-    private String loginButton;
-    private long createdate;
-    private long updatedate;
 }

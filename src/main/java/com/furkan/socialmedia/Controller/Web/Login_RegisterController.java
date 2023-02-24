@@ -1,25 +1,28 @@
 package com.furkan.socialmedia.Controller.Web;
 
 import com.furkan.socialmedia.Utility.StaticValues;
+import com.furkan.socialmedia.dto.request.UserRegisterRequest;
 import com.furkan.socialmedia.model.ModelLogin;
 import com.furkan.socialmedia.model.ModelRegister;
 import com.furkan.socialmedia.repository.entity.User;
 import com.furkan.socialmedia.service.UserService;
+import io.swagger.v3.oas.models.annotations.OpenAPI30;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Date;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("")
-public class LoginController {
+
+public class Login_RegisterController {
 
     private final UserService userService;
 
@@ -42,7 +45,7 @@ public class LoginController {
      *
      * @return
      */
-    @GetMapping("")
+    @GetMapping("/")
     public ModelAndView login() {
         /**
          * Burada model ve view a ihtiyacımız olacak
@@ -68,6 +71,7 @@ public class LoginController {
                         .loginbutton("Login")
                         .tabRegister("Sıgn Up")
                         .rememberMe("Remember me")
+
                         .error(false)
                         .build());
 
@@ -115,6 +119,7 @@ public class LoginController {
                 .loginButton("Login Page")
                 .submitButton("Sign up")
                 .phone("Phone")
+                        .createdate(System.currentTimeMillis())
                 .build()
         );
         return view;
@@ -123,17 +128,17 @@ public class LoginController {
     @PostMapping("/register")
     public Object register(String username, String name, String surname, String password, String birthday,
                            String gender, String email, String phone) {
-        userService.save(User.builder()
-                .username(username)
-                .name(name)
-                .surname(surname)
-                .password(password)
-                .birthdate(birthday)
-                .gender(gender)
-                .email(email)
-                .phone(phone)
-                .createDate(new Date())
+        userService.save(UserRegisterRequest.builder()
+                        .username(username)
+                        .name(name)
+                        .surname(surname)
+                        .password(password)
+                        .birthday(birthday)
+                        .gender(gender)
+                        .email(email)
+                        .phone(phone)
                 .build());
+
 
         return "redirect:/";
     }

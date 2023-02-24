@@ -23,10 +23,10 @@ public class FollowerService {
     public List<Follower> listAll(){
         return followerRepository.findAll();
     }
-    
-    public Optional<List<Follower>> findByUserid(long userid){
+
+    public Optional<Long> findByUserid(long userid){
         return followerRepository.findByUserid(userid);
-        
+
     }
 
     public Optional<Follower> findById(long id){
